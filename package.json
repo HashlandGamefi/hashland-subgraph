@@ -1,0 +1,22 @@
+{
+  "name": "hashland-subgraph",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HashlandGamefi/hashland-subgraph.git"
+  },
+  "author": "HASHLAND-TEAM",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HashlandGamefi/hashland-subgraph/issues"
+  },
+  "homepage": "https://github.com/HashlandGamefi/hashland-subgraph#readme",
+  "devDependencies": {
+  },
+  "dependencies": {
+  }
+}
