@@ -1,30 +1,8 @@
 ## Subgraphs
 
-1. **[Blocks](https://thegraph.com/legacy-explorer/subgraph/pancakeswap/blocks)**: Tracks all blocks on Binance Smart Chain.
+1. **[Hashland NFT](https://thegraph.com/explorer/subgraph/hashlandgamefi/hashland-nft)**: Tracks all Hashland NFT.
 
-2. **[Exchange](https://pancakeswap.medium.com/pancakeswap-info-relaunch-in-partnership-with-150-000-bounty-winner-streamingfast-f7892559d388)**: Tracks all PancakeSwap Exchange data with price, volume, liquidity, ...
-
-3. **[Farm Auctions](https://thegraph.com/legacy-explorer/subgraph/pancakeswap/farm-auctions)**: Tracks all PancakeSwap Farm Auctions with auctions and bids.
-
-4. **[Lottery](https://thegraph.com/legacy-explorer/subgraph/pancakeswap/lottery)**: Tracks all PancakeSwap Lottery with rounds, draws and tickets.
-
-5. **[NFT Market (v1)](https://thegraph.com/legacy-explorer/subgraph/pancakeswap/nft-market)**: Tracks all PancakeSwap NFT Market for ERC-721.
-
-6. **[Pairs](https://thegraph.com/legacy-explorer/subgraph/pancakeswap/pairs)**: Tracks all PancakeSwap Pairs and Tokens.
-
-7. **[Pancake Squad](https://thegraph.com/legacy-explorer/subgraph/pancakeswap/pancake-squad)**: Tracks all Pancake Squad metrics with Owners, Tokens (including metadata), and Transactions.
-
-8. **[Prediction (v1)](https://thegraph.com/legacy-explorer/subgraph/pancakeswap/prediction)**: Tracks all PancakeSwap Prediction (v1) with market, rounds, and bets.
-
-9. **[Prediction (v2)](https://thegraph.com/legacy-explorer/subgraph/pancakeswap/prediction-v2)**: Tracks all PancakeSwap Prediction (v2) with market, rounds, and bets.
-
-10. **[Profile](https://thegraph.com/legacy-explorer/subgraph/pancakeswap/profile)**: Tracks all PancakeSwap Profile with teams, users, points and campaigns.
-
-11. **[SmartChef](https://thegraph.com/legacy-explorer/subgraph/pancakeswap/smartchef)**: Tracks all PancakeSwap SmartChef (a.k.a. Syrup Pools) with tokens and rewards.
-
-12. **[Timelock](https://thegraph.com/legacy-explorer/subgraph/pancakeswap/timelock)**: Tracks all PancakeSwap Timelock queued, executed, and cancelled transactions.
-
-13. **[Trading Competition (v1)](https://thegraph.com/legacy-explorer/subgraph/pancakeswap/trading-competition-v1)**: Tracks all metrics for the Easter Battle (April 07—14, 2021).
+2. **[HCLP Pool](https://thegraph.com/explorer/subgraph/hashlandgamefi/hclp-pool)**: Tracks all HCLP in pool.
 
 ## Dependencies
 
@@ -37,14 +15,23 @@ npm install -g @graphprotocol/graph-cli
 
 ## Deployment
 
-For any of the subgraph: `blocks` as `[subgraph]`
+1. Run `graph auth` to authenticate with your deploy key.
 
-1. Run the `cd subgraphs/[subgraph]` command to move to the subgraph directory.
+2. Type `cd subgraphs/[subgraph]` to enter the subgraph.
 
-2. Run the `yarn codegen` command to prepare the TypeScript sources for the GraphQL (generated/*).
+3. Run `npm run deploy` to deploy the subgraph.
 
-3. Run the `yarn build` command to build the subgraph, and check compilation errors before deploying.
+Rinkeby:
 
-4. Run `graph auth --product hosted-service '<ACCESS_TOKEN>'`
+HC :0x9B2933E540296208622d6524afA71E6b26241964
+HN :0x02547A49fC80022D242b7AF3DE22E623394BF3a4
+HNBox :0x0D5b9825Ed4C189495F4e7Ac448E2c64636D7638
+HNUpgrade :0x7c68E870C7d3c3C5FB66c0EDb40775f2A6dD2dBe
+HNPool :0x4c0D1F183Fbf2fa2478145e6E506000D257e28F4
+HNMarket :0x3DaD2542679eD60808908F28591845a0C033c7Ab
+InvitePool :0x0c5C133a44937be8d7F6d8709aCc82D425873F0e
+HCLPPool :0xD5A49b04B6E3AE360b2B5E22e86640aE226cd4A3
 
-5. Deploy via `yarn deploy`.
+BUSD :0x6C3810A9f9D849767031AE118440a13544Ef4f2C
+HCLP :0xcd654796EDFcD4977500725BD8A3218b58cfd253
+BTC :0x9e861432799c90C4C1B275BBE9007b03Fe7bfD23
