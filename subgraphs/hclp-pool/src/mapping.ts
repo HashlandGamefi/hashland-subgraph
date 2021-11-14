@@ -1,5 +1,5 @@
-import { HCLPPool, Deposit, Withdraw } from "../../../hclp-pool/generated/HCLPPool/HCLPPool"
-import { UserInfo } from "../../../hclp-pool/generated/schema"
+import { HCLPPool, Deposit, Withdraw } from "../../hclp-pool/generated/HCLPPool/HCLPPool"
+import { UserInfo } from "../../hclp-pool/generated/schema"
 
 export function handleDeposit(event: Deposit): void {
   let entity = UserInfo.load(event.params.user.toHex());

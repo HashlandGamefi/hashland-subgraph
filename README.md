@@ -19,7 +19,11 @@ npm install -g @graphprotocol/graph-cli
 
 2. Type `cd subgraphs/[subgraph]` to enter the subgraph.
 
-3. Run `npm run deploy --node https://api.thegraph.com/deploy/ hashlandgamefi/[subgraph]` to deploy the subgraph.
+3. Run the `graph codegen` command to prepare the TypeScript sources for the GraphQL (generated/*).
+
+4. Run the `graph build` command to build the subgraph, and check compilation errors before deploying.
+
+5. Run `graph deploy --node https://api.thegraph.com/deploy/ hashlandgamefi/[subgraph]` to deploy the subgraph.
 
 Rinkeby:
 

@@ -14,8 +14,8 @@ import {
   SetLevel,
   SpawnHn,
   Transfer
-} from "../../hashland-nft2/generated/HN/HN"
-import { ExampleEntity } from "../../hashland-nft2/generated/schema"
+} from "../../hashland-nft/generated/HN/HN"
+import { ExampleEntity } from "../../hashland-nft/generated/schema"
 
 export function handleApproval(event: Approval): void {
   // Entities can be loaded from the store using a string ID; this ID
