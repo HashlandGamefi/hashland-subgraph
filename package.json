@@ -6,10 +6,10 @@
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ hashlandgamefi/hashland-nft",
-    "create-local": "graph create --node http://localhost:8020/ hashlandgamefi/hashland-nft",
-    "remove-local": "graph remove --node http://localhost:8020/ hashlandgamefi/hashland-nft",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 hashlandgamefi/hashland-nft"
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ hashlandgamefi/[subgraph]",
+    "create-local": "graph create --node http://localhost:8020/ hashlandgamefi/[subgraph]",
+    "remove-local": "graph remove --node http://localhost:8020/ hashlandgamefi/[subgraph]",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 hashlandgamefi/[subgraph]"
   },
   "repository": {
     "type": "git",
