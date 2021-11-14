@@ -21,8 +21,6 @@
     "url": "https://github.com/HashlandGamefi/hashland-subgraph/issues"
   },
   "homepage": "https://github.com/HashlandGamefi/hashland-subgraph#readme",
-  "devDependencies": {
-  },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.23.0",
     "@graphprotocol/graph-ts": "0.22.1"

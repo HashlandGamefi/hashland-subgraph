@@ -4,7 +4,7 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: HCLPPool
-    network: rinkeby
+    network: bsc
     source:
       address: "0xD5A49b04B6E3AE360b2B5E22e86640aE226cd4A3"
       abi: HCLPPool

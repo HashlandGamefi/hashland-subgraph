@@ -14,37 +14,13 @@ dataSources:
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - ApprovalForAll
-        - RenameHn
-        - RoleAdminChanged
-        - RoleGranted
-        - RoleRevoked
-        - SetBaseURI
-        - SetData
-        - SetDatas
-        - SetHashrates
-        - SetLevel
-        - SpawnHn
-        - Transfer
+        - HnInfo
       abis:
         - name: HN
           file: ./abis/HN.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,indexed uint256)
-          handler: handleApproval
-        - event: ApprovalForAll(indexed address,indexed address,bool)
-          handler: handleApprovalForAll
         - event: RenameHn(indexed uint256,string)
           handler: handleRenameHn
-        - event: RoleAdminChanged(indexed bytes32,indexed bytes32,indexed bytes32)
-          handler: handleRoleAdminChanged
-        - event: RoleGranted(indexed bytes32,indexed address,indexed address)
-          handler: handleRoleGranted
-        - event: RoleRevoked(indexed bytes32,indexed address,indexed address)
-          handler: handleRoleRevoked
-        - event: SetBaseURI(string)
-          handler: handleSetBaseURI
         - event: SetData(indexed uint256,string,uint256)
           handler: handleSetData
         - event: SetDatas(indexed uint256,string,uint256[])
