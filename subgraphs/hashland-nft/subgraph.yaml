@@ -1,0 +1,60 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: HN
+    network: bsc
+    source:
+      address: "0xEEa8bD31DA9A2169C38968958B6DF216381B0f08"
+      abi: HN
+      startBlock: 12357879
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - ApprovalForAll
+        - RenameHn
+        - RoleAdminChanged
+        - RoleGranted
+        - RoleRevoked
+        - SetBaseURI
+        - SetData
+        - SetDatas
+        - SetHashrates
+        - SetLevel
+        - SpawnHn
+        - Transfer
+      abis:
+        - name: HN
+          file: ./abis/HN.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,indexed uint256)
+          handler: handleApproval
+        - event: ApprovalForAll(indexed address,indexed address,bool)
+          handler: handleApprovalForAll
+        - event: RenameHn(indexed uint256,string)
+          handler: handleRenameHn
+        - event: RoleAdminChanged(indexed bytes32,indexed bytes32,indexed bytes32)
+          handler: handleRoleAdminChanged
+        - event: RoleGranted(indexed bytes32,indexed address,indexed address)
+          handler: handleRoleGranted
+        - event: RoleRevoked(indexed bytes32,indexed address,indexed address)
+          handler: handleRoleRevoked
+        - event: SetBaseURI(string)
+          handler: handleSetBaseURI
+        - event: SetData(indexed uint256,string,uint256)
+          handler: handleSetData
+        - event: SetDatas(indexed uint256,string,uint256[])
+          handler: handleSetDatas
+        - event: SetHashrates(indexed uint256,uint256[])
+          handler: handleSetHashrates
+        - event: SetLevel(indexed uint256,uint256)
+          handler: handleSetLevel
+        - event: SpawnHn(indexed address,uint256)
+          handler: handleSpawnHn
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ./src/mapping.ts

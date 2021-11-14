@@ -1,0 +1,15 @@
+type HnInfo @entity {
+  id: ID!
+  owner: Bytes!
+  name: String
+  ip: BigInt!
+  series: BigInt!
+  level: BigInt!
+  spawntime: BigInt!
+  # hashrates: 
+
+    # mapping(uint256 => uint256[]) public hashrates;
+
+    # mapping(uint256 => mapping(string => uint256)) public data;
+    # mapping(uint256 => mapping(string => uint256[])) public datas;
+}
