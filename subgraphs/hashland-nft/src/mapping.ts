@@ -1,116 +1,65 @@
 import { BigInt } from "@graphprotocol/graph-ts"
 import {
   HN,
-  Approval,
-  ApprovalForAll,
-  RenameHn,
-  RoleAdminChanged,
-  RoleGranted,
-  RoleRevoked,
-  SetBaseURI,
-  SetData,
-  SetDatas,
   SetHashrates,
   SetLevel,
   SpawnHn,
   Transfer
 } from "../../hashland-nft/generated/HN/HN"
-import { ExampleEntity } from "../../hashland-nft/generated/schema"
+import { HnInfo } from "../../hashland-nft/generated/schema"
 
-export function handleApproval(event: Approval): void {
-  // Entities can be loaded from the store using a string ID; this ID
-  // needs to be unique across all entities of the same type
-  let entity = ExampleEntity.load(event.transaction.from.toHex())
-
-  // Entities only exist after they have been saved to the store;
-  // `null` checks allow to create entities on demand
+export function handleSetHashrates(event: SetHashrates): void {
+  let entity = HnInfo.load(event.params.hnId.toHex());
   if (!entity) {
-    entity = new ExampleEntity(event.transaction.from.toHex())
-
-    // Entity fields can be set using simple assignments
-    entity.count = BigInt.fromI32(0)
+    entity = new HnInfo(event.params.hnId.toHex());
+    entity.hnId = event.params.hnId;
   }
 
-  // BigInt and BigDecimal math are supported
-  entity.count = entity.count + BigInt.fromI32(1)
+  entity.hcHashrate = event.params.hashrates[0];
+  entity.btcHashrate = event.params.hashrates[1];
 
-  // Entity fields can be set based on event parameters
-  entity.owner = event.params.owner
-  entity.approved = event.params.approved
-
-  // Entities can be written to the store with `.save()`
-  entity.save()
-
-  // Note: If a handler doesn't require existing field values, it is faster
-  // _not_ to load the entity from the store. Instead, create it fresh with
-  // `new Entity(...)`, set the fields that should be updated and save the
-  // entity back to the store. Fields that were not set or unset remain
-  // unchanged, allowing for partial updates to be applied.
-
-  // It is also possible to access smart contracts from mappings. For
-  // example, the contract that has emitted the event can be connected to
-  // with:
-  //
-  // let contract = Contract.bind(event.address)
-  //
-  // The following functions can then be called on this contract to access
-  // state variables and other data:
-  //
-  // - contract.DEFAULT_ADMIN_ROLE(...)
-  // - contract.MANAGER_ROLE(...)
-  // - contract.SETTER_ROLE(...)
-  // - contract.SPAWNER_ROLE(...)
-  // - contract.balanceOf(...)
-  // - contract.baseURI(...)
-  // - contract.data(...)
-  // - contract.datas(...)
-  // - contract.getApproved(...)
-  // - contract.getDatas(...)
-  // - contract.getHashrates(...)
-  // - contract.getRandomNumber(...)
-  // - contract.getRoleAdmin(...)
-  // - contract.getRoleMember(...)
-  // - contract.getRoleMemberCount(...)
-  // - contract.hasRole(...)
-  // - contract.hashrates(...)
-  // - contract.ip(...)
-  // - contract.isApprovedForAll(...)
-  // - contract.level(...)
-  // - contract.name(...)
-  // - contract.name(...)
-  // - contract.ownerOf(...)
-  // - contract.series(...)
-  // - contract.spawnHn(...)
-  // - contract.spawntime(...)
-  // - contract.supportsInterface(...)
-  // - contract.symbol(...)
-  // - contract.tokenByIndex(...)
-  // - contract.tokenOfOwnerByIndex(...)
-  // - contract.tokenURI(...)
-  // - contract.tokensOfOwnerBySize(...)
-  // - contract.totalSupply(...)
+  entity.save();
 }
 
-export function handleApprovalForAll(event: ApprovalForAll): void {}
+export function handleSetLevel(event: SetLevel): void {
+  let entity = HnInfo.load(event.params.hnId.toHex());
+  if (!entity) {
+    entity = new HnInfo(event.params.hnId.toHex());
+    entity.hnId = event.params.hnId;
+  }
 
-export function handleRenameHn(event: RenameHn): void {}
+  entity.level = event.params.level;
 
-export function handleRoleAdminChanged(event: RoleAdminChanged): void {}
+  entity.save();
+}
 
-export function handleRoleGranted(event: RoleGranted): void {}
+export function handleSpawnHn(event: SpawnHn): void {
+  let entity = HnInfo.load(event.params.hnId.toHex());
+  if (!entity) {
+    entity = new HnInfo(event.params.hnId.toHex());
+    entity.hnId = event.params.hnId;
+  }
+  const hn = HN.bind(event.address);
 
-export function handleRoleRevoked(event: RoleRevoked): void {}
+  entity.owner = hn.ownerOf(event.params.hnId);
+  entity.ip = hn.ip(event.params.hnId);
+  entity.series = hn.series(event.params.hnId);
+  entity.level = hn.level(event.params.hnId);
+  entity.spawntime = hn.spawntime(event.params.hnId);
+  entity.hcHashrate = hn.hashrates(event.params.hnId, BigInt.fromI32(0));
+  entity.btcHashrate = hn.hashrates(event.params.hnId, BigInt.fromI32(1));
 
-export function handleSetBaseURI(event: SetBaseURI): void {}
+  entity.save();
+}
 
-export function handleSetData(event: SetData): void {}
+export function handleTransfer(event: Transfer): void {
+  let entity = HnInfo.load(event.params.tokenId.toHex());
+  if (!entity) {
+    entity = new HnInfo(event.params.tokenId.toHex());
+    entity.hnId = event.params.tokenId;
+  }
 
-export function handleSetDatas(event: SetDatas): void {}
+  entity.owner = event.params.to;
 
-export function handleSetHashrates(event: SetHashrates): void {}
-
-export function handleSetLevel(event: SetLevel): void {}
-
-export function handleSpawnHn(event: SpawnHn): void {}
-
-export function handleTransfer(event: Transfer): void {}
+  entity.save();
+}

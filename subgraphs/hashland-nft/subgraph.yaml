@@ -19,12 +19,6 @@ dataSources:
         - name: HN
           file: ./abis/HN.json
       eventHandlers:
-        - event: RenameHn(indexed uint256,string)
-          handler: handleRenameHn
-        - event: SetData(indexed uint256,string,uint256)
-          handler: handleSetData
-        - event: SetDatas(indexed uint256,string,uint256[])
-          handler: handleSetDatas
         - event: SetHashrates(indexed uint256,uint256[])
           handler: handleSetHashrates
         - event: SetLevel(indexed uint256,uint256)

@@ -6,9 +6,9 @@ dataSources:
     name: HCLPPool
     network: bsc
     source:
-      address: "0xD5A49b04B6E3AE360b2B5E22e86640aE226cd4A3"
+      address: "0x0AE7A7330f19c2A1dEaBbACce8dE6bD6c22De313"
       abi: HCLPPool
-      startBlock: 9565288
+      startBlock: 12777480
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
