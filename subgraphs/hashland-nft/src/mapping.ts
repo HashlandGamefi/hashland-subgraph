@@ -41,7 +41,7 @@ export function handleSpawnHn(event: SpawnHn): void {
   }
   const hn = HN.bind(event.address);
 
-  entity.owner = hn.ownerOf(event.params.hnId);
+  entity.owner = event.params.to;
   entity.ip = hn.ip(event.params.hnId);
   entity.series = hn.series(event.params.hnId);
   entity.level = hn.level(event.params.hnId);
