@@ -37,11 +37,21 @@ export function handleSetLevel(event: SetLevel): void {
     ent = new HnCount(BigInt.fromI32(0).toHex());
   }
 
-  ent[`l${entity.level.toString()}`] = ent[`l${entity.level.toString()}`].plus(BigInt.fromI32(1));
   if (entity.level.equals(BigInt.fromI32(1))) {
     ent.l5 = ent.l5.minus(BigInt.fromI32(1));
+    ent.l1 = ent.l1.plus(BigInt.fromI32(1));
+  } else if (entity.level.equals(BigInt.fromI32(2))) {
+    ent.l1 = ent.l1.minus(BigInt.fromI32(1));
+    ent.l2 = ent.l2.plus(BigInt.fromI32(1));
+  } else if (entity.level.equals(BigInt.fromI32(3))) {
+    ent.l2 = ent.l2.minus(BigInt.fromI32(1));
+    ent.l3 = ent.l3.plus(BigInt.fromI32(1));
+  } else if (entity.level.equals(BigInt.fromI32(4))) {
+    ent.l3 = ent.l3.minus(BigInt.fromI32(1));
+    ent.l4 = ent.l4.plus(BigInt.fromI32(1));
   } else {
-    ent[`l${entity.level.minus(BigInt.fromI32(1)).toString()}`] = ent[`l${entity.level.minus(BigInt.fromI32(1)).toString()}`].minus(BigInt.fromI32(1));
+    ent.l4 = ent.l4.minus(BigInt.fromI32(1));
+    ent.l5 = ent.l5.plus(BigInt.fromI32(1));
   }
 
   ent.save();
@@ -70,7 +80,17 @@ export function handleSpawnHn(event: SpawnHn): void {
     ent = new HnCount(BigInt.fromI32(0).toHex());
   }
 
-  ent[`l${entity.level.toString()}`] = ent[`l${entity.level.toString()}`].plus(BigInt.fromI32(1));
+  if (entity.level.equals(BigInt.fromI32(1))) {
+    ent.l1 = ent.l1.plus(BigInt.fromI32(1));
+  } else if (entity.level.equals(BigInt.fromI32(2))) {
+    ent.l2 = ent.l2.plus(BigInt.fromI32(1));
+  } else if (entity.level.equals(BigInt.fromI32(3))) {
+    ent.l3 = ent.l3.plus(BigInt.fromI32(1));
+  } else if (entity.level.equals(BigInt.fromI32(4))) {
+    ent.l4 = ent.l4.plus(BigInt.fromI32(1));
+  } else {
+    ent.l5 = ent.l5.plus(BigInt.fromI32(1));
+  }
 
   ent.save();
 }
