@@ -6,7 +6,7 @@ import {
   SpawnHn,
   Transfer
 } from "../../hashland-nft/generated/HN/HN"
-import { HnInfo } from "../../hashland-nft/generated/schema"
+import { HnInfo, HnCount } from "../../hashland-nft/generated/schema"
 
 export function handleSetHashrates(event: SetHashrates): void {
   let entity = HnInfo.load(event.params.hnId.toHex());
@@ -31,6 +31,20 @@ export function handleSetLevel(event: SetLevel): void {
   entity.level = event.params.level;
 
   entity.save();
+
+  let ent = HnCount.load(BigInt.fromI32(0).toHex());
+  if (!ent) {
+    ent = new HnCount(BigInt.fromI32(0).toHex());
+  }
+
+  ent[`l${entity.level.toString()}`] = ent[`l${entity.level.toString()}`].plus(BigInt.fromI32(1));
+  if (entity.level.equals(BigInt.fromI32(1))) {
+    ent.l5 = ent.l5.minus(BigInt.fromI32(1));
+  } else {
+    ent[`l${entity.level.minus(BigInt.fromI32(1)).toString()}`] = ent[`l${entity.level.minus(BigInt.fromI32(1)).toString()}`].minus(BigInt.fromI32(1));
+  }
+
+  ent.save();
 }
 
 export function handleSpawnHn(event: SpawnHn): void {
@@ -50,6 +64,15 @@ export function handleSpawnHn(event: SpawnHn): void {
   entity.btcHashrate = hn.hashrates(event.params.hnId, BigInt.fromI32(1));
 
   entity.save();
+
+  let ent = HnCount.load(BigInt.fromI32(0).toHex());
+  if (!ent) {
+    ent = new HnCount(BigInt.fromI32(0).toHex());
+  }
+
+  ent[`l${entity.level.toString()}`] = ent[`l${entity.level.toString()}`].plus(BigInt.fromI32(1));
+
+  ent.save();
 }
 
 export function handleTransfer(event: Transfer): void {
