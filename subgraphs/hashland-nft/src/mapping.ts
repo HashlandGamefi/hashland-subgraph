@@ -6,7 +6,7 @@ import {
   SpawnHn,
   Transfer
 } from "../../hashland-nft/generated/HN/HN"
-import { HnInfo, HnCount } from "../../hashland-nft/generated/schema"
+import { HnInfo, HnCount, HnCountByOwner } from "../../hashland-nft/generated/schema"
 
 export function handleSetHashrates(event: SetHashrates): void {
   let entity = HnInfo.load(event.params.hnId.toHex());
@@ -55,6 +55,31 @@ export function handleSetLevel(event: SetLevel): void {
   }
 
   ent.save();
+
+  let en = HnCountByOwner.load(entity.owner.toHex());
+  if (!en) {
+    en = new HnCountByOwner(entity.owner.toHex());
+    en.owner = entity.owner;
+  }
+
+  if (entity.level.equals(BigInt.fromI32(1))) {
+    en.l5 = en.l5.minus(BigInt.fromI32(1));
+    en.l1 = en.l1.plus(BigInt.fromI32(1));
+  } else if (entity.level.equals(BigInt.fromI32(2))) {
+    en.l1 = en.l1.minus(BigInt.fromI32(1));
+    en.l2 = en.l2.plus(BigInt.fromI32(1));
+  } else if (entity.level.equals(BigInt.fromI32(3))) {
+    en.l2 = en.l2.minus(BigInt.fromI32(1));
+    en.l3 = en.l3.plus(BigInt.fromI32(1));
+  } else if (entity.level.equals(BigInt.fromI32(4))) {
+    en.l3 = en.l3.minus(BigInt.fromI32(1));
+    en.l4 = en.l4.plus(BigInt.fromI32(1));
+  } else {
+    en.l4 = en.l4.minus(BigInt.fromI32(1));
+    en.l5 = en.l5.plus(BigInt.fromI32(1));
+  }
+
+  en.save();
 }
 
 export function handleSpawnHn(event: SpawnHn): void {
@@ -80,6 +105,7 @@ export function handleSpawnHn(event: SpawnHn): void {
     ent = new HnCount(BigInt.fromI32(0).toHex());
   }
 
+  ent.total = ent.total.plus(BigInt.fromI32(1));
   if (entity.level.equals(BigInt.fromI32(1))) {
     ent.l1 = ent.l1.plus(BigInt.fromI32(1));
   } else if (entity.level.equals(BigInt.fromI32(2))) {
@@ -93,6 +119,27 @@ export function handleSpawnHn(event: SpawnHn): void {
   }
 
   ent.save();
+
+  let en = HnCountByOwner.load(entity.owner.toHex());
+  if (!en) {
+    en = new HnCountByOwner(entity.owner.toHex());
+    en.owner = entity.owner;
+  }
+
+  en.total = en.total.plus(BigInt.fromI32(1));
+  if (entity.level.equals(BigInt.fromI32(1))) {
+    en.l1 = en.l1.plus(BigInt.fromI32(1));
+  } else if (entity.level.equals(BigInt.fromI32(2))) {
+    en.l2 = en.l2.plus(BigInt.fromI32(1));
+  } else if (entity.level.equals(BigInt.fromI32(3))) {
+    en.l3 = en.l3.plus(BigInt.fromI32(1));
+  } else if (entity.level.equals(BigInt.fromI32(4))) {
+    en.l4 = en.l4.plus(BigInt.fromI32(1));
+  } else {
+    en.l5 = en.l5.plus(BigInt.fromI32(1));
+  }
+
+  en.save();
 }
 
 export function handleTransfer(event: Transfer): void {
@@ -105,4 +152,46 @@ export function handleTransfer(event: Transfer): void {
   entity.owner = event.params.to;
 
   entity.save();
+
+  let ent = HnCountByOwner.load(event.params.from.toHex());
+  if (!ent) {
+    ent = new HnCountByOwner(event.params.from.toHex());
+    ent.owner = event.params.from;
+  }
+
+  ent.total = ent.total.minus(BigInt.fromI32(1));
+  if (entity.level.equals(BigInt.fromI32(1))) {
+    ent.l1 = ent.l1.minus(BigInt.fromI32(1));
+  } else if (entity.level.equals(BigInt.fromI32(2))) {
+    ent.l2 = ent.l2.minus(BigInt.fromI32(1));
+  } else if (entity.level.equals(BigInt.fromI32(3))) {
+    ent.l3 = ent.l3.minus(BigInt.fromI32(1));
+  } else if (entity.level.equals(BigInt.fromI32(4))) {
+    ent.l4 = ent.l4.minus(BigInt.fromI32(1));
+  } else {
+    ent.l5 = ent.l5.minus(BigInt.fromI32(1));
+  }
+
+  ent.save();
+
+  let en = HnCountByOwner.load(event.params.to.toHex());
+  if (!en) {
+    en = new HnCountByOwner(event.params.to.toHex());
+    en.owner = event.params.to;
+  }
+
+  en.total = en.total.plus(BigInt.fromI32(1));
+  if (entity.level.equals(BigInt.fromI32(1))) {
+    en.l1 = en.l1.plus(BigInt.fromI32(1));
+  } else if (entity.level.equals(BigInt.fromI32(2))) {
+    en.l2 = en.l2.plus(BigInt.fromI32(1));
+  } else if (entity.level.equals(BigInt.fromI32(3))) {
+    en.l3 = en.l3.plus(BigInt.fromI32(1));
+  } else if (entity.level.equals(BigInt.fromI32(4))) {
+    en.l4 = en.l4.plus(BigInt.fromI32(1));
+  } else {
+    en.l5 = en.l5.plus(BigInt.fromI32(1));
+  }
+
+  en.save();
 }

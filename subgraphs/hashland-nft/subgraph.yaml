@@ -16,6 +16,7 @@ dataSources:
       entities:
         - HnInfo
         - HnCount
+        - HnCountByOwner
       abis:
         - name: HN
           file: ./abis/HN.json
