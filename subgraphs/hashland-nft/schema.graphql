@@ -5,7 +5,7 @@ type HnInfo @entity {
   ip: BigInt!
   series: BigInt!
   level: BigInt!
-  class: BigInt!
+  hnClass: BigInt!
   spawntime: BigInt!
   hcHashrate: BigInt!
   btcHashrate: BigInt!
