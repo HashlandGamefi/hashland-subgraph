@@ -90,7 +90,6 @@ export function handleSpawnHn(event: SpawnHn): void {
   }
   const hn = HN.bind(event.address);
 
-  hnInfo.owner = event.params.to;
   hnInfo.ip = hn.ip(event.params.hnId);
   hnInfo.series = hn.series(event.params.hnId);
   hnInfo.level = hn.level(event.params.hnId);
