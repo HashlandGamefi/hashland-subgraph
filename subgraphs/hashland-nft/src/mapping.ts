@@ -93,6 +93,7 @@ export function handleSpawnHn(event: SpawnHn): void {
   hnInfo.ip = hn.ip(event.params.hnId);
   hnInfo.series = hn.series(event.params.hnId);
   hnInfo.level = hn.level(event.params.hnId);
+  hnInfo.class = hn.getRandomNumber(event.params.hnId, 'class', BigInt.fromI32(1), BigInt.fromI32(4));
   hnInfo.spawntime = hn.spawntime(event.params.hnId);
   hnInfo.hcHashrate = hn.hashrates(event.params.hnId, BigInt.fromI32(0));
   hnInfo.btcHashrate = hn.hashrates(event.params.hnId, BigInt.fromI32(1));
