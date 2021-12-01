@@ -1,4 +1,4 @@
-import { BigInt } from "@graphprotocol/graph-ts"
+import { BigInt, Address } from "@graphprotocol/graph-ts"
 import {
   HN,
   SetHashrates,
@@ -9,189 +9,170 @@ import {
 import { HnInfo, HnCount, HnCountByOwner } from "../../hashland-nft/generated/schema"
 
 export function handleSetHashrates(event: SetHashrates): void {
-  let entity = HnInfo.load(event.params.hnId.toHex());
-  if (!entity) {
-    entity = new HnInfo(event.params.hnId.toHex());
-    entity.hnId = event.params.hnId;
+  let hnInfo = HnInfo.load(event.params.hnId.toHex());
+  if (!hnInfo) {
+    hnInfo = new HnInfo(event.params.hnId.toHex());
+    hnInfo.hnId = event.params.hnId;
   }
 
-  entity.hcHashrate = event.params.hashrates[0];
-  entity.btcHashrate = event.params.hashrates[1];
+  hnInfo.hcHashrate = event.params.hashrates[0];
+  hnInfo.btcHashrate = event.params.hashrates[1];
 
-  entity.save();
+  hnInfo.save();
 }
 
 export function handleSetLevel(event: SetLevel): void {
-  let entity = HnInfo.load(event.params.hnId.toHex());
-  if (!entity) {
-    entity = new HnInfo(event.params.hnId.toHex());
-    entity.hnId = event.params.hnId;
+  let hnInfo = HnInfo.load(event.params.hnId.toHex());
+  if (!hnInfo) {
+    hnInfo = new HnInfo(event.params.hnId.toHex());
+    hnInfo.hnId = event.params.hnId;
   }
 
-  entity.level = event.params.level;
+  hnInfo.level = event.params.level;
 
-  entity.save();
+  hnInfo.save();
 
-  let ent = HnCount.load(BigInt.fromI32(0).toHex());
-  if (!ent) {
-    ent = new HnCount(BigInt.fromI32(0).toHex());
+  let hnCount = HnCount.load(BigInt.fromI32(0).toHex());
+  if (!hnCount) {
+    hnCount = new HnCount(BigInt.fromI32(0).toHex());
   }
 
-  if (entity.level.equals(BigInt.fromI32(1))) {
-    ent.l5 = ent.l5.minus(BigInt.fromI32(1));
-    ent.l1 = ent.l1.plus(BigInt.fromI32(1));
-  } else if (entity.level.equals(BigInt.fromI32(2))) {
-    ent.l1 = ent.l1.minus(BigInt.fromI32(1));
-    ent.l2 = ent.l2.plus(BigInt.fromI32(1));
-  } else if (entity.level.equals(BigInt.fromI32(3))) {
-    ent.l2 = ent.l2.minus(BigInt.fromI32(1));
-    ent.l3 = ent.l3.plus(BigInt.fromI32(1));
-  } else if (entity.level.equals(BigInt.fromI32(4))) {
-    ent.l3 = ent.l3.minus(BigInt.fromI32(1));
-    ent.l4 = ent.l4.plus(BigInt.fromI32(1));
+  if (event.params.level.equals(BigInt.fromI32(1))) {
+    hnCount.l5 = hnCount.l5.minus(BigInt.fromI32(1));
+    hnCount.l1 = hnCount.l1.plus(BigInt.fromI32(1));
+  } else if (event.params.level.equals(BigInt.fromI32(2))) {
+    hnCount.l1 = hnCount.l1.minus(BigInt.fromI32(1));
+    hnCount.l2 = hnCount.l2.plus(BigInt.fromI32(1));
+  } else if (event.params.level.equals(BigInt.fromI32(3))) {
+    hnCount.l2 = hnCount.l2.minus(BigInt.fromI32(1));
+    hnCount.l3 = hnCount.l3.plus(BigInt.fromI32(1));
+  } else if (event.params.level.equals(BigInt.fromI32(4))) {
+    hnCount.l3 = hnCount.l3.minus(BigInt.fromI32(1));
+    hnCount.l4 = hnCount.l4.plus(BigInt.fromI32(1));
   } else {
-    ent.l4 = ent.l4.minus(BigInt.fromI32(1));
-    ent.l5 = ent.l5.plus(BigInt.fromI32(1));
+    hnCount.l4 = hnCount.l4.minus(BigInt.fromI32(1));
+    hnCount.l5 = hnCount.l5.plus(BigInt.fromI32(1));
   }
 
-  ent.save();
+  hnCount.save();
 
-  let en = HnCountByOwner.load(entity.owner.toHex());
-  if (!en) {
-    en = new HnCountByOwner(entity.owner.toHex());
-    en.owner = entity.owner;
+  let hnCountByOwner = HnCountByOwner.load(hnInfo.owner.toHex());
+  if (!hnCountByOwner) {
+    hnCountByOwner = new HnCountByOwner(hnInfo.owner.toHex());
+    hnCountByOwner.owner = hnInfo.owner;
   }
 
-  if (entity.level.equals(BigInt.fromI32(1))) {
-    en.l5 = en.l5.minus(BigInt.fromI32(1));
-    en.l1 = en.l1.plus(BigInt.fromI32(1));
-  } else if (entity.level.equals(BigInt.fromI32(2))) {
-    en.l1 = en.l1.minus(BigInt.fromI32(1));
-    en.l2 = en.l2.plus(BigInt.fromI32(1));
-  } else if (entity.level.equals(BigInt.fromI32(3))) {
-    en.l2 = en.l2.minus(BigInt.fromI32(1));
-    en.l3 = en.l3.plus(BigInt.fromI32(1));
-  } else if (entity.level.equals(BigInt.fromI32(4))) {
-    en.l3 = en.l3.minus(BigInt.fromI32(1));
-    en.l4 = en.l4.plus(BigInt.fromI32(1));
+  if (event.params.level.equals(BigInt.fromI32(1))) {
+    hnCountByOwner.l5 = hnCountByOwner.l5.minus(BigInt.fromI32(1));
+    hnCountByOwner.l1 = hnCountByOwner.l1.plus(BigInt.fromI32(1));
+  } else if (event.params.level.equals(BigInt.fromI32(2))) {
+    hnCountByOwner.l1 = hnCountByOwner.l1.minus(BigInt.fromI32(1));
+    hnCountByOwner.l2 = hnCountByOwner.l2.plus(BigInt.fromI32(1));
+  } else if (event.params.level.equals(BigInt.fromI32(3))) {
+    hnCountByOwner.l2 = hnCountByOwner.l2.minus(BigInt.fromI32(1));
+    hnCountByOwner.l3 = hnCountByOwner.l3.plus(BigInt.fromI32(1));
+  } else if (event.params.level.equals(BigInt.fromI32(4))) {
+    hnCountByOwner.l3 = hnCountByOwner.l3.minus(BigInt.fromI32(1));
+    hnCountByOwner.l4 = hnCountByOwner.l4.plus(BigInt.fromI32(1));
   } else {
-    en.l4 = en.l4.minus(BigInt.fromI32(1));
-    en.l5 = en.l5.plus(BigInt.fromI32(1));
+    hnCountByOwner.l4 = hnCountByOwner.l4.minus(BigInt.fromI32(1));
+    hnCountByOwner.l5 = hnCountByOwner.l5.plus(BigInt.fromI32(1));
   }
 
-  en.save();
+  hnCountByOwner.save();
 }
 
 export function handleSpawnHn(event: SpawnHn): void {
-  let entity = HnInfo.load(event.params.hnId.toHex());
-  if (!entity) {
-    entity = new HnInfo(event.params.hnId.toHex());
-    entity.hnId = event.params.hnId;
+  let hnInfo = HnInfo.load(event.params.hnId.toHex());
+  if (!hnInfo) {
+    hnInfo = new HnInfo(event.params.hnId.toHex());
+    hnInfo.hnId = event.params.hnId;
   }
   const hn = HN.bind(event.address);
 
-  entity.owner = event.params.to;
-  entity.ip = hn.ip(event.params.hnId);
-  entity.series = hn.series(event.params.hnId);
-  entity.level = hn.level(event.params.hnId);
-  entity.spawntime = hn.spawntime(event.params.hnId);
-  entity.hcHashrate = hn.hashrates(event.params.hnId, BigInt.fromI32(0));
-  entity.btcHashrate = hn.hashrates(event.params.hnId, BigInt.fromI32(1));
+  hnInfo.owner = event.params.to;
+  hnInfo.ip = hn.ip(event.params.hnId);
+  hnInfo.series = hn.series(event.params.hnId);
+  hnInfo.level = hn.level(event.params.hnId);
+  hnInfo.spawntime = hn.spawntime(event.params.hnId);
+  hnInfo.hcHashrate = hn.hashrates(event.params.hnId, BigInt.fromI32(0));
+  hnInfo.btcHashrate = hn.hashrates(event.params.hnId, BigInt.fromI32(1));
 
-  entity.save();
+  hnInfo.save();
 
-  let ent = HnCount.load(BigInt.fromI32(0).toHex());
-  if (!ent) {
-    ent = new HnCount(BigInt.fromI32(0).toHex());
+  let hnCount = HnCount.load(BigInt.fromI32(0).toHex());
+  if (!hnCount) {
+    hnCount = new HnCount(BigInt.fromI32(0).toHex());
   }
 
-  ent.total = ent.total.plus(BigInt.fromI32(1));
-  if (entity.level.equals(BigInt.fromI32(1))) {
-    ent.l1 = ent.l1.plus(BigInt.fromI32(1));
-  } else if (entity.level.equals(BigInt.fromI32(2))) {
-    ent.l2 = ent.l2.plus(BigInt.fromI32(1));
-  } else if (entity.level.equals(BigInt.fromI32(3))) {
-    ent.l3 = ent.l3.plus(BigInt.fromI32(1));
-  } else if (entity.level.equals(BigInt.fromI32(4))) {
-    ent.l4 = ent.l4.plus(BigInt.fromI32(1));
+  hnCount.total = hnCount.total.plus(BigInt.fromI32(1));
+  if (hnInfo.level.equals(BigInt.fromI32(1))) {
+    hnCount.l1 = hnCount.l1.plus(BigInt.fromI32(1));
+  } else if (hnInfo.level.equals(BigInt.fromI32(2))) {
+    hnCount.l2 = hnCount.l2.plus(BigInt.fromI32(1));
+  } else if (hnInfo.level.equals(BigInt.fromI32(3))) {
+    hnCount.l3 = hnCount.l3.plus(BigInt.fromI32(1));
+  } else if (hnInfo.level.equals(BigInt.fromI32(4))) {
+    hnCount.l4 = hnCount.l4.plus(BigInt.fromI32(1));
   } else {
-    ent.l5 = ent.l5.plus(BigInt.fromI32(1));
+    hnCount.l5 = hnCount.l5.plus(BigInt.fromI32(1));
   }
 
-  ent.save();
-
-  let en = HnCountByOwner.load(entity.owner.toHex());
-  if (!en) {
-    en = new HnCountByOwner(entity.owner.toHex());
-    en.owner = entity.owner;
-  }
-
-  en.total = en.total.plus(BigInt.fromI32(1));
-  if (entity.level.equals(BigInt.fromI32(1))) {
-    en.l1 = en.l1.plus(BigInt.fromI32(1));
-  } else if (entity.level.equals(BigInt.fromI32(2))) {
-    en.l2 = en.l2.plus(BigInt.fromI32(1));
-  } else if (entity.level.equals(BigInt.fromI32(3))) {
-    en.l3 = en.l3.plus(BigInt.fromI32(1));
-  } else if (entity.level.equals(BigInt.fromI32(4))) {
-    en.l4 = en.l4.plus(BigInt.fromI32(1));
-  } else {
-    en.l5 = en.l5.plus(BigInt.fromI32(1));
-  }
-
-  en.save();
+  hnCount.save();
 }
 
 export function handleTransfer(event: Transfer): void {
-  let entity = HnInfo.load(event.params.tokenId.toHex());
-  if (!entity) {
-    entity = new HnInfo(event.params.tokenId.toHex());
-    entity.hnId = event.params.tokenId;
+  let hnInfo = HnInfo.load(event.params.tokenId.toHex());
+  if (!hnInfo) {
+    hnInfo = new HnInfo(event.params.tokenId.toHex());
+    hnInfo.hnId = event.params.tokenId;
   }
 
-  entity.owner = event.params.to;
+  hnInfo.owner = event.params.to;
 
-  entity.save();
+  hnInfo.save();
 
-  let ent = HnCountByOwner.load(event.params.from.toHex());
-  if (!ent) {
-    ent = new HnCountByOwner(event.params.from.toHex());
-    ent.owner = event.params.from;
+  if (event.params.from.notEqual(Address.zero())) {
+    let hnCountByOwner = HnCountByOwner.load(event.params.from.toHex());
+    if (!hnCountByOwner) {
+      hnCountByOwner = new HnCountByOwner(event.params.from.toHex());
+      hnCountByOwner.owner = event.params.from;
+    }
+
+    hnCountByOwner.total = hnCountByOwner.total.minus(BigInt.fromI32(1));
+    if (hnInfo.level.equals(BigInt.fromI32(1))) {
+      hnCountByOwner.l1 = hnCountByOwner.l1.minus(BigInt.fromI32(1));
+    } else if (hnInfo.level.equals(BigInt.fromI32(2))) {
+      hnCountByOwner.l2 = hnCountByOwner.l2.minus(BigInt.fromI32(1));
+    } else if (hnInfo.level.equals(BigInt.fromI32(3))) {
+      hnCountByOwner.l3 = hnCountByOwner.l3.minus(BigInt.fromI32(1));
+    } else if (hnInfo.level.equals(BigInt.fromI32(4))) {
+      hnCountByOwner.l4 = hnCountByOwner.l4.minus(BigInt.fromI32(1));
+    } else {
+      hnCountByOwner.l5 = hnCountByOwner.l5.minus(BigInt.fromI32(1));
+    }
+
+    hnCountByOwner.save();
   }
 
-  ent.total = ent.total.minus(BigInt.fromI32(1));
-  if (entity.level.equals(BigInt.fromI32(1))) {
-    ent.l1 = ent.l1.minus(BigInt.fromI32(1));
-  } else if (entity.level.equals(BigInt.fromI32(2))) {
-    ent.l2 = ent.l2.minus(BigInt.fromI32(1));
-  } else if (entity.level.equals(BigInt.fromI32(3))) {
-    ent.l3 = ent.l3.minus(BigInt.fromI32(1));
-  } else if (entity.level.equals(BigInt.fromI32(4))) {
-    ent.l4 = ent.l4.minus(BigInt.fromI32(1));
+  let hnCountByOwner = HnCountByOwner.load(event.params.to.toHex());
+  if (!hnCountByOwner) {
+    hnCountByOwner = new HnCountByOwner(event.params.to.toHex());
+    hnCountByOwner.owner = event.params.to;
+  }
+
+  hnCountByOwner.total = hnCountByOwner.total.plus(BigInt.fromI32(1));
+  if (hnInfo.level.equals(BigInt.fromI32(1))) {
+    hnCountByOwner.l1 = hnCountByOwner.l1.plus(BigInt.fromI32(1));
+  } else if (hnInfo.level.equals(BigInt.fromI32(2))) {
+    hnCountByOwner.l2 = hnCountByOwner.l2.plus(BigInt.fromI32(1));
+  } else if (hnInfo.level.equals(BigInt.fromI32(3))) {
+    hnCountByOwner.l3 = hnCountByOwner.l3.plus(BigInt.fromI32(1));
+  } else if (hnInfo.level.equals(BigInt.fromI32(4))) {
+    hnCountByOwner.l4 = hnCountByOwner.l4.plus(BigInt.fromI32(1));
   } else {
-    ent.l5 = ent.l5.minus(BigInt.fromI32(1));
+    hnCountByOwner.l5 = hnCountByOwner.l5.plus(BigInt.fromI32(1));
   }
 
-  ent.save();
-
-  let en = HnCountByOwner.load(event.params.to.toHex());
-  if (!en) {
-    en = new HnCountByOwner(event.params.to.toHex());
-    en.owner = event.params.to;
-  }
-
-  en.total = en.total.plus(BigInt.fromI32(1));
-  if (entity.level.equals(BigInt.fromI32(1))) {
-    en.l1 = en.l1.plus(BigInt.fromI32(1));
-  } else if (entity.level.equals(BigInt.fromI32(2))) {
-    en.l2 = en.l2.plus(BigInt.fromI32(1));
-  } else if (entity.level.equals(BigInt.fromI32(3))) {
-    en.l3 = en.l3.plus(BigInt.fromI32(1));
-  } else if (entity.level.equals(BigInt.fromI32(4))) {
-    en.l4 = en.l4.plus(BigInt.fromI32(1));
-  } else {
-    en.l5 = en.l5.plus(BigInt.fromI32(1));
-  }
-
-  en.save();
+  hnCountByOwner.save();
 }
