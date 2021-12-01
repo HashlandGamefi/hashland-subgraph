@@ -32,27 +32,15 @@ export function handleSetLevel(event: SetLevel): void {
 
   hnInfo.save();
 
+  const level = event.params.level.toI32();
+
   let hnCount = HnCount.load(BigInt.fromI32(0).toHex());
   if (!hnCount) {
     hnCount = new HnCount(BigInt.fromI32(0).toHex());
   }
 
-  if (event.params.level.equals(BigInt.fromI32(1))) {
-    hnCount.l5 = hnCount.l5.minus(BigInt.fromI32(1));
-    hnCount.l1 = hnCount.l1.plus(BigInt.fromI32(1));
-  } else if (event.params.level.equals(BigInt.fromI32(2))) {
-    hnCount.l1 = hnCount.l1.minus(BigInt.fromI32(1));
-    hnCount.l2 = hnCount.l2.plus(BigInt.fromI32(1));
-  } else if (event.params.level.equals(BigInt.fromI32(3))) {
-    hnCount.l2 = hnCount.l2.minus(BigInt.fromI32(1));
-    hnCount.l3 = hnCount.l3.plus(BigInt.fromI32(1));
-  } else if (event.params.level.equals(BigInt.fromI32(4))) {
-    hnCount.l3 = hnCount.l3.minus(BigInt.fromI32(1));
-    hnCount.l4 = hnCount.l4.plus(BigInt.fromI32(1));
-  } else {
-    hnCount.l4 = hnCount.l4.minus(BigInt.fromI32(1));
-    hnCount.l5 = hnCount.l5.plus(BigInt.fromI32(1));
-  }
+  hnCount.level[level > 1 ? level - 2 : 4] = hnCount.level[level > 1 ? level - 2 : 4].minus(BigInt.fromI32(1));
+  hnCount.level[level - 1] = hnCount.level[level - 1].plus(BigInt.fromI32(1));
 
   hnCount.save();
 
@@ -62,22 +50,8 @@ export function handleSetLevel(event: SetLevel): void {
     hnCountByOwner.owner = hnInfo.owner;
   }
 
-  if (event.params.level.equals(BigInt.fromI32(1))) {
-    hnCountByOwner.l5 = hnCountByOwner.l5.minus(BigInt.fromI32(1));
-    hnCountByOwner.l1 = hnCountByOwner.l1.plus(BigInt.fromI32(1));
-  } else if (event.params.level.equals(BigInt.fromI32(2))) {
-    hnCountByOwner.l1 = hnCountByOwner.l1.minus(BigInt.fromI32(1));
-    hnCountByOwner.l2 = hnCountByOwner.l2.plus(BigInt.fromI32(1));
-  } else if (event.params.level.equals(BigInt.fromI32(3))) {
-    hnCountByOwner.l2 = hnCountByOwner.l2.minus(BigInt.fromI32(1));
-    hnCountByOwner.l3 = hnCountByOwner.l3.plus(BigInt.fromI32(1));
-  } else if (event.params.level.equals(BigInt.fromI32(4))) {
-    hnCountByOwner.l3 = hnCountByOwner.l3.minus(BigInt.fromI32(1));
-    hnCountByOwner.l4 = hnCountByOwner.l4.plus(BigInt.fromI32(1));
-  } else {
-    hnCountByOwner.l4 = hnCountByOwner.l4.minus(BigInt.fromI32(1));
-    hnCountByOwner.l5 = hnCountByOwner.l5.plus(BigInt.fromI32(1));
-  }
+  hnCountByOwner.level[level > 1 ? level - 2 : 4] = hnCountByOwner.level[level > 1 ? level - 2 : 4].minus(BigInt.fromI32(1));
+  hnCountByOwner.level[level - 1] = hnCountByOwner.level[level - 1].plus(BigInt.fromI32(1));
 
   hnCountByOwner.save();
 }
@@ -100,23 +74,15 @@ export function handleSpawnHn(event: SpawnHn): void {
 
   hnInfo.save();
 
+  const level = hnInfo.level.toI32();
+
   let hnCount = HnCount.load(BigInt.fromI32(0).toHex());
   if (!hnCount) {
     hnCount = new HnCount(BigInt.fromI32(0).toHex());
   }
 
   hnCount.total = hnCount.total.plus(BigInt.fromI32(1));
-  if (hnInfo.level.equals(BigInt.fromI32(1))) {
-    hnCount.l1 = hnCount.l1.plus(BigInt.fromI32(1));
-  } else if (hnInfo.level.equals(BigInt.fromI32(2))) {
-    hnCount.l2 = hnCount.l2.plus(BigInt.fromI32(1));
-  } else if (hnInfo.level.equals(BigInt.fromI32(3))) {
-    hnCount.l3 = hnCount.l3.plus(BigInt.fromI32(1));
-  } else if (hnInfo.level.equals(BigInt.fromI32(4))) {
-    hnCount.l4 = hnCount.l4.plus(BigInt.fromI32(1));
-  } else {
-    hnCount.l5 = hnCount.l5.plus(BigInt.fromI32(1));
-  }
+  hnCount.level[level - 1] = hnCount.level[level - 1].plus(BigInt.fromI32(1));
 
   hnCount.save();
 }
@@ -132,6 +98,8 @@ export function handleTransfer(event: Transfer): void {
 
   hnInfo.save();
 
+  const level = hnInfo.level.toI32();
+
   if (event.params.from.notEqual(Address.zero())) {
     let hnCountByOwner = HnCountByOwner.load(event.params.from.toHex());
     if (!hnCountByOwner) {
@@ -140,17 +108,7 @@ export function handleTransfer(event: Transfer): void {
     }
 
     hnCountByOwner.total = hnCountByOwner.total.minus(BigInt.fromI32(1));
-    if (hnInfo.level.equals(BigInt.fromI32(1))) {
-      hnCountByOwner.l1 = hnCountByOwner.l1.minus(BigInt.fromI32(1));
-    } else if (hnInfo.level.equals(BigInt.fromI32(2))) {
-      hnCountByOwner.l2 = hnCountByOwner.l2.minus(BigInt.fromI32(1));
-    } else if (hnInfo.level.equals(BigInt.fromI32(3))) {
-      hnCountByOwner.l3 = hnCountByOwner.l3.minus(BigInt.fromI32(1));
-    } else if (hnInfo.level.equals(BigInt.fromI32(4))) {
-      hnCountByOwner.l4 = hnCountByOwner.l4.minus(BigInt.fromI32(1));
-    } else {
-      hnCountByOwner.l5 = hnCountByOwner.l5.minus(BigInt.fromI32(1));
-    }
+    hnCountByOwner.level[level - 1] = hnCountByOwner.level[level - 1].minus(BigInt.fromI32(1));
 
     hnCountByOwner.save();
   }
@@ -162,17 +120,7 @@ export function handleTransfer(event: Transfer): void {
   }
 
   hnCountByOwner.total = hnCountByOwner.total.plus(BigInt.fromI32(1));
-  if (hnInfo.level.equals(BigInt.fromI32(1))) {
-    hnCountByOwner.l1 = hnCountByOwner.l1.plus(BigInt.fromI32(1));
-  } else if (hnInfo.level.equals(BigInt.fromI32(2))) {
-    hnCountByOwner.l2 = hnCountByOwner.l2.plus(BigInt.fromI32(1));
-  } else if (hnInfo.level.equals(BigInt.fromI32(3))) {
-    hnCountByOwner.l3 = hnCountByOwner.l3.plus(BigInt.fromI32(1));
-  } else if (hnInfo.level.equals(BigInt.fromI32(4))) {
-    hnCountByOwner.l4 = hnCountByOwner.l4.plus(BigInt.fromI32(1));
-  } else {
-    hnCountByOwner.l5 = hnCountByOwner.l5.plus(BigInt.fromI32(1));
-  }
+  hnCountByOwner.level[level - 1] = hnCountByOwner.level[level - 1].plus(BigInt.fromI32(1));
 
   hnCountByOwner.save();
 }
