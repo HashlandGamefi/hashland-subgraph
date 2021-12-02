@@ -32,7 +32,7 @@ export function handleSetLevel(event: SetLevel): void {
 
   hnInfo.save();
 
-  const level = event.params.level.toI32();
+  const level = Number(event.params.level.toString());
 
   let hnCount = HnCount.load(BigInt.fromI32(0).toHex());
   if (!hnCount) {
@@ -80,7 +80,7 @@ export function handleSpawnHn(event: SpawnHn): void {
 
   hnInfo.save();
 
-  const level = hnInfo.level.toI32();
+  const level = Number(hnInfo.level.toString());
 
   let hnCount = HnCount.load(BigInt.fromI32(0).toHex());
   if (!hnCount) {
@@ -107,7 +107,7 @@ export function handleTransfer(event: Transfer): void {
 
   hnInfo.save();
 
-  const level = hnInfo.level.toI32();
+  const level = Number(hnInfo.level.toString());
 
   if (event.params.from.notEqual(Address.zero())) {
     let hnCountByOwner = HnCountByOwner.load(event.params.from.toHex());
