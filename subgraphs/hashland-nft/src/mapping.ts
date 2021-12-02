@@ -37,6 +37,7 @@ export function handleSetLevel(event: SetLevel): void {
   let hnCount = HnCount.load(BigInt.fromI32(0).toHex());
   if (!hnCount) {
     hnCount = new HnCount(BigInt.fromI32(0).toHex());
+    hnCount.level = [BigInt.fromI32(0), BigInt.fromI32(0), BigInt.fromI32(0), BigInt.fromI32(0), BigInt.fromI32(0)];
   }
 
   const hnCountLevel = hnCount.level;
@@ -50,6 +51,7 @@ export function handleSetLevel(event: SetLevel): void {
   if (!hnCountByOwner) {
     hnCountByOwner = new HnCountByOwner(hnInfo.owner.toHex());
     hnCountByOwner.owner = hnInfo.owner;
+    hnCountByOwner.level = [BigInt.fromI32(0), BigInt.fromI32(0), BigInt.fromI32(0), BigInt.fromI32(0), BigInt.fromI32(0)];
   }
 
   const hnCountByOwnerLevel = hnCountByOwner.level;
@@ -83,6 +85,7 @@ export function handleSpawnHn(event: SpawnHn): void {
   let hnCount = HnCount.load(BigInt.fromI32(0).toHex());
   if (!hnCount) {
     hnCount = new HnCount(BigInt.fromI32(0).toHex());
+    hnCount.level = [BigInt.fromI32(0), BigInt.fromI32(0), BigInt.fromI32(0), BigInt.fromI32(0), BigInt.fromI32(0)];
   }
 
   hnCount.total = hnCount.total.plus(BigInt.fromI32(1));
@@ -111,6 +114,7 @@ export function handleTransfer(event: Transfer): void {
     if (!hnCountByOwner) {
       hnCountByOwner = new HnCountByOwner(event.params.from.toHex());
       hnCountByOwner.owner = event.params.from;
+      hnCountByOwner.level = [BigInt.fromI32(0), BigInt.fromI32(0), BigInt.fromI32(0), BigInt.fromI32(0), BigInt.fromI32(0)];
     }
 
     hnCountByOwner.total = hnCountByOwner.total.minus(BigInt.fromI32(1));
@@ -125,6 +129,7 @@ export function handleTransfer(event: Transfer): void {
   if (!hnCountByOwner) {
     hnCountByOwner = new HnCountByOwner(event.params.to.toHex());
     hnCountByOwner.owner = event.params.to;
+    hnCountByOwner.level = [BigInt.fromI32(0), BigInt.fromI32(0), BigInt.fromI32(0), BigInt.fromI32(0), BigInt.fromI32(0)];
   }
 
   hnCountByOwner.total = hnCountByOwner.total.plus(BigInt.fromI32(1));
