@@ -1,0 +1,12 @@
+type HnInfo @entity {
+  id: ID!
+  hnId: BigInt!
+  owner: Bytes!
+  ip: BigInt!
+  series: BigInt!
+  level: BigInt!
+  hnClass: BigInt!
+  spawntime: BigInt!
+  hcHashrate: BigInt!
+  btcHashrate: BigInt!
+}

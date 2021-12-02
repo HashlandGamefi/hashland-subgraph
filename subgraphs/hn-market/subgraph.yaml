@@ -1,0 +1,28 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: HNMarket
+    network: bsc
+    source:
+      address: "0x3110f63D4f20F94DBd3543B26eE355021Af20739"
+      abi: HNMarket
+      startBlock: 12358094
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - HnInfo
+      abis:
+        - name: HNMarket
+          file: ./abis/HNMarket.json
+      eventHandlers:
+        - event: Buy(indexed address,address[],uint256[],uint256[],bool[])
+          handler: handleBuy
+        - event: Cancel(indexed address,uint256[],bool)
+          handler: handleCancel
+        - event: Sell(indexed address,uint256[],uint256[],bool[])
+          handler: handleSell
+      file: ./src/mapping.ts

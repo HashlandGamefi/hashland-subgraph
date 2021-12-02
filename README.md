@@ -2,7 +2,9 @@
 
 1. **[Hashland NFT](https://thegraph.com/explorer/subgraph/hashlandgamefi/hashland-nft)**: Tracks all Hashland NFT.
 
-2. **[HCLP Pool](https://thegraph.com/explorer/subgraph/hashlandgamefi/hclp-pool)**: Tracks all HCLP in pool.
+2. **[HN Market](https://thegraph.com/explorer/subgraph/hashlandgamefi/hn-market)**: Tracks all HN in market.
+
+3. **[HCLP Pool](https://thegraph.com/explorer/subgraph/hashlandgamefi/hclp-pool)**: Tracks all HCLP in pool.
 
 ## Dependencies
 
