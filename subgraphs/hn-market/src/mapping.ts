@@ -67,4 +67,3 @@ export function handleSell(event: Sell): void {
     sellInfo.save();
   }
 }
-
