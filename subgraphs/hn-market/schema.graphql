@@ -1,7 +1,30 @@
-type HnInfo @entity {
+type BuyInfo @entity {
   id: ID!
   hnId: BigInt!
-  owner: Bytes!
+  buyer: Bytes!
+  seller: Bytes!
+  price: BigInt!
+  feeRatio: BigInt!
+  buyAmout: BigInt!
+  feeAmout: BigInt!
+  isInPool: Boolean!
+  buyTime: BigInt!
+  ip: BigInt!
+  series: BigInt!
+  level: BigInt!
+  hnClass: BigInt!
+  spawntime: BigInt!
+  hcHashrate: BigInt!
+  btcHashrate: BigInt!
+}
+
+type SellInfo @entity {
+  id: ID!
+  hnId: BigInt!
+  seller: Bytes!
+  price: BigInt!
+  isInPool: Boolean!
+  sellTime: BigInt!
   ip: BigInt!
   series: BigInt!
   level: BigInt!
