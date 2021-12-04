@@ -7,9 +7,9 @@ const hnAddr = Address.fromString('0xEEa8bD31DA9A2169C38968958B6DF216381B0f08');
 
 export function handleBuy(event: Buy): void {
   for (let i = 0; i < event.params.hnIds.length; i++) {
-    let buyInfo = BuyInfo.load(event.params.hnIds[i].toHex());
+    let buyInfo = BuyInfo.load(event.transaction.hash.toHex() + "-" + event.logIndex.toString() + "-" + event.params.hnIds[i].toHex());
     if (!buyInfo) {
-      buyInfo = new BuyInfo(event.params.hnIds[i].toHex());
+      buyInfo = new BuyInfo(event.transaction.hash.toHex() + "-" + event.logIndex.toString() + "-" + event.params.hnIds[i].toHex());
       buyInfo.hnId = event.params.hnIds[i];
     }
     const hnMarket = HNMarket.bind(event.address);

@@ -8,7 +8,7 @@ dataSources:
     source:
       address: "0x3110f63D4f20F94DBd3543B26eE355021Af20739"
       abi: HNMarket
-      startBlock: 12358094
+      startBlock: 13156323
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -19,6 +19,8 @@ dataSources:
       abis:
         - name: HNMarket
           file: ./abis/HNMarket.json
+        - name: HN
+          file: ../hashland-nft/abis/HN.json
       eventHandlers:
         - event: Buy(indexed address,address[],uint256[],uint256[],bool[])
           handler: handleBuy
