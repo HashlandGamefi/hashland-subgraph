@@ -19,8 +19,8 @@ export function handleBuy(event: Buy): void {
     buyInfo.seller = event.params.sellers[i];
     buyInfo.price = event.params.prices[i];
     buyInfo.feeRatio = hnMarket.feeRatio();
-    buyInfo.buyAmout = buyInfo.price.times(buyInfo.feeRatio).div(BigInt.fromI32(10000));
-    buyInfo.feeAmout = buyInfo.price.minus(buyInfo.buyAmout);
+    buyInfo.feeAmout = buyInfo.price.times(buyInfo.feeRatio).div(BigInt.fromI32(10000));
+    buyInfo.buyAmout = buyInfo.price.minus(buyInfo.feeAmout);
     buyInfo.isInPool = event.params.isInPools[i];
     buyInfo.buyTime = event.block.timestamp;
     buyInfo.ip = hn.ip(event.params.hnIds[i]);
