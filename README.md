@@ -4,7 +4,9 @@
 
 2. **[HN Market](https://thegraph.com/explorer/subgraph/hashlandgamefi/hn-market)**: Tracks all HN in market.
 
-3. **[HCLP Pool](https://thegraph.com/explorer/subgraph/hashlandgamefi/hclp-pool)**: Tracks all HCLP in pool.
+3. **[HN Pool](https://thegraph.com/explorer/subgraph/hashlandgamefi/hn-pool)**: Tracks all HN in pool.
+
+4. **[HCLP Pool](https://thegraph.com/explorer/subgraph/hashlandgamefi/hclp-pool)**: Tracks all HCLP in pool.
 
 ## Dependencies
 

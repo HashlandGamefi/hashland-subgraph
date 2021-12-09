@@ -1,0 +1,6 @@
+type ExampleEntity @entity {
+  id: ID!
+  count: BigInt!
+  tokenIds: [BigInt]! # uint256[]
+  amounts: [BigInt]! # uint256[]
+}
