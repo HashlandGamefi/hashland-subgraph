@@ -5,7 +5,7 @@ type BuyInfo @entity {
   seller: Bytes!
   price: BigInt!
   feeRatio: BigInt!
-  buyAmout: BigInt!
+  sellAmout: BigInt!
   feeAmout: BigInt!
   isInPool: Boolean!
   buyTime: BigInt!
