@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/HashlandGamefi/hashland-subgraph#readme",
   "dependencies": {
-    "@graphprotocol/graph-cli": "0.24.1",
+    "@graphprotocol/graph-cli": "0.25.1",
     "@graphprotocol/graph-ts": "0.24.1"
   }
 }

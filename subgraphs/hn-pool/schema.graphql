@@ -1,6 +1,23 @@
-type ExampleEntity @entity {
+type HnInfo @entity {
   id: ID!
-  count: BigInt!
-  tokenIds: [BigInt]! # uint256[]
-  amounts: [BigInt]! # uint256[]
+  hnId: BigInt!
+  owner: Bytes!
+  ip: BigInt!
+  series: BigInt!
+  level: BigInt!
+  hnClass: BigInt!
+  spawntime: BigInt!
+  hcHashrate: BigInt!
+  btcHashrate: BigInt!
+}
+
+type HnCountByOwner @entity {
+  id: ID!
+  owner: Bytes!
+  total: BigInt!
+  l1: BigInt!
+  l2: BigInt!
+  l3: BigInt!
+  l4: BigInt!
+  l5: BigInt!
 }

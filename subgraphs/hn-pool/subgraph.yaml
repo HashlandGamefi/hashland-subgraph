@@ -8,6 +8,7 @@ dataSources:
     source:
       address: "0x28b45001dB087afcbeC20f5dD6C041Cf46b40AC3"
       abi: HNPool
+      startBlock: 12358057
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -18,16 +19,6 @@ dataSources:
         - Deposit
         - HNMarketWithdraw
         - HarvestTokens
-        - RoleAdminChanged
-        - RoleGranted
-        - RoleRevoked
-        - SetHNMarketAddress
-        - SetInvitePoolAddress
-        - SetMaxSlots
-        - SetOpenStatus
-        - SetReceivingAddress
-        - SetSlotBasePrice
-        - SetTokensInfo
         - Withdraw
       abis:
         - name: HNPool
@@ -43,26 +34,6 @@ dataSources:
           handler: handleHNMarketWithdraw
         - event: HarvestTokens(indexed address,uint256[],uint256[])
           handler: handleHarvestTokens
-        - event: RoleAdminChanged(indexed bytes32,indexed bytes32,indexed bytes32)
-          handler: handleRoleAdminChanged
-        - event: RoleGranted(indexed bytes32,indexed address,indexed address)
-          handler: handleRoleGranted
-        - event: RoleRevoked(indexed bytes32,indexed address,indexed address)
-          handler: handleRoleRevoked
-        - event: SetHNMarketAddress(address)
-          handler: handleSetHNMarketAddress
-        - event: SetInvitePoolAddress(address)
-          handler: handleSetInvitePoolAddress
-        - event: SetMaxSlots(uint256)
-          handler: handleSetMaxSlots
-        - event: SetOpenStatus(bool)
-          handler: handleSetOpenStatus
-        - event: SetReceivingAddress(address)
-          handler: handleSetReceivingAddress
-        - event: SetSlotBasePrice(uint256)
-          handler: handleSetSlotBasePrice
-        - event: SetTokensInfo(address[],uint256[])
-          handler: handleSetTokensInfo
         - event: Withdraw(indexed address,uint256[])
           handler: handleWithdraw
       file: ./src/mapping.ts
