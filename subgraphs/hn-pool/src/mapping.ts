@@ -69,6 +69,8 @@ export function handleDeposit(event: Deposit): void {
 
     hnInfo.save();
 
+    userInfo.stakedHC = userInfo.stakedHC.plus(hnInfo.hcHashrate);
+    userInfo.stakedBTC = userInfo.stakedBTC.plus(hnInfo.btcHashrate);
     userInfo.total = userInfo.total.plus(BigInt.fromI32(1));
     if (hnInfo.level.equals(BigInt.fromI32(1))) {
       userInfo.l1 = userInfo.l1.plus(BigInt.fromI32(1));
@@ -99,6 +101,8 @@ export function handleHNMarketWithdraw(event: HNMarketWithdraw): void {
     hnInfo.hnId = event.params.hnId;
   }
 
+  userInfo.stakedHC = userInfo.stakedHC.minus(hnInfo.hcHashrate);
+  userInfo.stakedBTC = userInfo.stakedBTC.minus(hnInfo.btcHashrate);
   userInfo.total = userInfo.total.minus(BigInt.fromI32(1));
   if (hnInfo.level.equals(BigInt.fromI32(1))) {
     userInfo.l1 = userInfo.l1.minus(BigInt.fromI32(1));
@@ -149,6 +153,8 @@ export function handleWithdraw(event: Withdraw): void {
       hnInfo.hnId = event.params.hnIds[i];
     }
 
+    userInfo.stakedHC = userInfo.stakedHC.minus(hnInfo.hcHashrate);
+    userInfo.stakedBTC = userInfo.stakedBTC.minus(hnInfo.btcHashrate);
     userInfo.total = userInfo.total.minus(BigInt.fromI32(1));
     if (hnInfo.level.equals(BigInt.fromI32(1))) {
       userInfo.l1 = userInfo.l1.minus(BigInt.fromI32(1));

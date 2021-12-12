@@ -18,6 +18,8 @@ type UserInfo @entity {
   purchasedSlotsAmount: BigInt!
   harvestedHC: BigInt!
   harvestedBTC: BigInt!
+  stakedHC: BigInt!
+  stakedBTC: BigInt!
   total: BigInt!
   l1: BigInt!
   l2: BigInt!
