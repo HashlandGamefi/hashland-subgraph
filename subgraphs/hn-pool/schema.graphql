@@ -11,17 +11,6 @@ type HnInfo @entity {
   btcHashrate: BigInt!
 }
 
-type HnCountByOwner @entity {
-  id: ID!
-  owner: Bytes!
-  total: BigInt!
-  l1: BigInt!
-  l2: BigInt!
-  l3: BigInt!
-  l4: BigInt!
-  l5: BigInt!
-}
-
 type UserInfo @entity {
   id: ID!
   user: Bytes!
@@ -29,6 +18,12 @@ type UserInfo @entity {
   purchasedSlotsAmount: BigInt!
   harvestedHC: BigInt!
   harvestedBTC: BigInt!
+  total: BigInt!
+  l1: BigInt!
+  l2: BigInt!
+  l3: BigInt!
+  l4: BigInt!
+  l5: BigInt!
 }
 
 type SlotCount @entity {
