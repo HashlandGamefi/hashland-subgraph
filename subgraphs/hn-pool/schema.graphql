@@ -30,4 +30,8 @@ type SlotCount @entity {
   id: ID!
   purchasedSlots: BigInt!
   purchasedSlotsAmount: BigInt!
+  s1: BigInt!
+  s2: BigInt!
+  s3: BigInt!
+  s4: BigInt!
 }
