@@ -1,0 +1,24 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: HNUpgrade
+    network: bsc
+    source:
+      address: "0xd54A485b8149ba70B48cE013479E02F05D38B428"
+      abi: HNUpgrade
+      startBlock: 12750276
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - UpgradeHns
+      abis:
+        - name: HNUpgrade
+          file: ./abis/HNUpgrade.json
+      eventHandlers:
+        - event: UpgradeHns(indexed address,uint256,uint256,uint256[])
+          handler: handleUpgradeHns
+      file: ./src/mapping.ts

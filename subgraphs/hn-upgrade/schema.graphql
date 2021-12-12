@@ -1,0 +1,10 @@
+type UserInfo @entity {
+  id: ID!
+  user: Bytes!
+  totalAmount: BigInt!
+  total: BigInt!
+  l2: BigInt!
+  l3: BigInt!
+  l4: BigInt!
+  l5: BigInt!
+}
