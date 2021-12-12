@@ -30,3 +30,9 @@ type UserInfo @entity {
   harvestedHC: BigInt!
   harvestedBTC: BigInt!
 }
+
+type SlotCount @entity {
+  id: ID!
+  purchasedSlots: BigInt!
+  purchasedSlotsAmount: BigInt!
+}

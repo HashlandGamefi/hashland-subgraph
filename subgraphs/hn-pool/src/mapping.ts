@@ -7,7 +7,7 @@ import {
   Withdraw
 } from "../generated/HNPool/HNPool"
 import { HN } from "../../hashland-nft/generated/HN/HN"
-import { HnInfo, HnCountByOwner, UserInfo } from "../generated/schema"
+import { HnInfo, HnCountByOwner, UserInfo, SlotCount } from "../generated/schema"
 
 const hnAddr = Address.fromString('0xEEa8bD31DA9A2169C38968958B6DF216381B0f08');
 
@@ -22,6 +22,16 @@ export function handleBuySlot(event: BuySlot): void {
   userInfo.purchasedSlotsAmount = userInfo.purchasedSlotsAmount.plus(event.params.amount);
 
   userInfo.save();
+
+  let slotCount = SlotCount.load(BigInt.fromI32(0).toHex());
+  if (!slotCount) {
+    slotCount = new SlotCount(BigInt.fromI32(0).toHex());
+  }
+
+  slotCount.purchasedSlots = slotCount.purchasedSlots.plus(BigInt.fromI32(1));
+  slotCount.purchasedSlotsAmount = slotCount.purchasedSlotsAmount.plus(event.params.amount);
+
+  slotCount.save();
 }
 
 export function handleDeposit(event: Deposit): void {
