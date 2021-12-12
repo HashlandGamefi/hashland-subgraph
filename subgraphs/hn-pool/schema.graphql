@@ -21,3 +21,12 @@ type HnCountByOwner @entity {
   l4: BigInt!
   l5: BigInt!
 }
+
+type UserInfo @entity {
+  id: ID!
+  user: Bytes!
+  purchasedSlots: BigInt!
+  purchasedSlotsAmount: BigInt!
+  harvestedHC: BigInt!
+  harvestedBTC: BigInt!
+}
