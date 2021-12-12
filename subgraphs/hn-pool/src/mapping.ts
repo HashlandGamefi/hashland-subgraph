@@ -30,11 +30,11 @@ export function handleBuySlot(event: BuySlot): void {
 
   slotCount.purchasedSlots = slotCount.purchasedSlots.plus(BigInt.fromI32(1));
   slotCount.purchasedSlotsAmount = slotCount.purchasedSlotsAmount.plus(event.params.amount);
-  if (event.params.amount.toI32() / 1e18 == 4) {
+  if (event.params.amount.equals(BigInt.fromString('4000000000000000000'))) {
     slotCount.s1 = slotCount.s1.plus(BigInt.fromI32(1));
-  } else if (event.params.amount.toI32() / 1e18 == 16) {
+  } else if (event.params.amount.equals(BigInt.fromString('16000000000000000000'))) {
     slotCount.s2 = slotCount.s2.plus(BigInt.fromI32(1));
-  } else if (event.params.amount.toI32() / 1e18 == 64) {
+  } else if (event.params.amount.equals(BigInt.fromString('64000000000000000000'))) {
     slotCount.s3 = slotCount.s3.plus(BigInt.fromI32(1));
   } else {
     slotCount.s4 = slotCount.s4.plus(BigInt.fromI32(1));
