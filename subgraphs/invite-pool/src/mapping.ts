@@ -21,15 +21,17 @@ export function handleBindInviter(event: BindInviter): void {
 }
 
 export function handleDepositInviter(event: DepositInviter): void {
-  let inviterInfo = InviterInfo.load(event.params.inviter.toHex());
-  if (!inviterInfo) {
-    inviterInfo = new InviterInfo(event.params.inviter.toHex());
-    inviterInfo.inviter = event.params.inviter;
+  if (event.params.inviter.notEqual(Address.zero())) {
+    let inviterInfo = InviterInfo.load(event.params.inviter.toHex());
+    if (!inviterInfo) {
+      inviterInfo = new InviterInfo(event.params.inviter.toHex());
+      inviterInfo.inviter = event.params.inviter;
+    }
+
+    inviterInfo.stakedHC = inviterInfo.stakedHC.plus(event.params.hashrate);
+
+    inviterInfo.save();
   }
-
-  inviterInfo.stakedHC = inviterInfo.stakedHC.plus(event.params.hashrate);
-
-  inviterInfo.save();
 }
 
 export function handleHarvestToken(event: HarvestToken): void {
@@ -45,13 +47,15 @@ export function handleHarvestToken(event: HarvestToken): void {
 }
 
 export function handleWithdrawInviter(event: WithdrawInviter): void {
-  let inviterInfo = InviterInfo.load(event.params.inviter.toHex());
-  if (!inviterInfo) {
-    inviterInfo = new InviterInfo(event.params.inviter.toHex());
-    inviterInfo.inviter = event.params.inviter;
+  if (event.params.inviter.notEqual(Address.zero())) {
+    let inviterInfo = InviterInfo.load(event.params.inviter.toHex());
+    if (!inviterInfo) {
+      inviterInfo = new InviterInfo(event.params.inviter.toHex());
+      inviterInfo.inviter = event.params.inviter;
+    }
+
+    inviterInfo.stakedHC = inviterInfo.stakedHC.minus(event.params.hashrate);
+
+    inviterInfo.save();
   }
-
-  inviterInfo.stakedHC = inviterInfo.stakedHC.minus(event.params.hashrate);
-
-  inviterInfo.save();
 }
