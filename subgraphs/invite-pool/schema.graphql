@@ -1,0 +1,7 @@
+type InviterInfo @entity {
+  id: ID!
+  inviter: Bytes!
+  harvestedHC: BigInt!
+  stakedHC: BigInt!
+  usersLength: BigInt!
+}

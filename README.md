@@ -8,7 +8,9 @@
 
 4. **[HN Upgrade](https://thegraph.com/explorer/subgraph/hashlandgamefi/hn-upgrade)**: Tracks the upgrade of all HN.
 
-5. **[HCLP Pool](https://thegraph.com/explorer/subgraph/hashlandgamefi/hclp-pool)**: Tracks all HCLP in pool.
+5. **[Invite Pool](https://thegraph.com/explorer/subgraph/hashlandgamefi/invite-pool)**: Tracks all inviters in pool.
+
+6. **[HCLP Pool](https://thegraph.com/explorer/subgraph/hashlandgamefi/hclp-pool)**: Tracks all HCLP in pool.
 
 ## Dependencies
 

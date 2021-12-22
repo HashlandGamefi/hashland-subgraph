@@ -1,0 +1,33 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: InvitePool
+    network: bsc
+    source:
+      address: "0x9FA50C14CafF0925069e64Fb7915AAE44e352332"
+      abi: InvitePool
+      startBlock: 13694178
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - BindInviter
+        - DepositInviter
+        - HarvestToken
+        - WithdrawInviter
+      abis:
+        - name: InvitePool
+          file: ./abis/InvitePool.json
+      eventHandlers:
+        - event: BindInviter(indexed address,address,uint256)
+          handler: handleBindInviter
+        - event: DepositInviter(indexed address,address,uint256)
+          handler: handleDepositInviter
+        - event: HarvestToken(indexed address,uint256)
+          handler: handleHarvestToken
+        - event: WithdrawInviter(indexed address,address,uint256)
+          handler: handleWithdrawInviter
+      file: ./src/mapping.ts
