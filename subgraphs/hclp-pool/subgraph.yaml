@@ -8,7 +8,7 @@ dataSources:
     source:
       address: "0x0AE7A7330f19c2A1dEaBbACce8dE6bD6c22De313"
       abi: HCLPPool
-      startBlock: 13867432
+      startBlock: 13868880
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
