@@ -2,4 +2,5 @@ type UserInfo @entity {
   id: ID!
   user: Bytes!
   stake: BigInt!
+  harvested: BigInt!
 }

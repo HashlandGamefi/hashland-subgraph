@@ -1,26 +1,42 @@
-import { Deposit, Withdraw } from "../../hclp-pool/generated/HCLPPool/HCLPPool"
-import { UserInfo } from "../../hclp-pool/generated/schema"
+import {
+  Deposit,
+  Withdraw,
+  HarvestToken
+} from "../generated/HCLPPool/HCLPPool"
+import { UserInfo } from "../generated/schema"
 
 export function handleDeposit(event: Deposit): void {
-  let entity = UserInfo.load(event.params.user.toHex());
-  if (!entity) {
-    entity = new UserInfo(event.params.user.toHex());
-    entity.user = event.params.user;
+  let userInfo = UserInfo.load(event.params.user.toHex());
+  if (!userInfo) {
+    userInfo = new UserInfo(event.params.user.toHex());
+    userInfo.user = event.params.user;
   }
 
-  entity.stake = entity.stake.plus(event.params.amount);
+  userInfo.stake = userInfo.stake.plus(event.params.amount);
 
-  entity.save();
+  userInfo.save();
 }
 
 export function handleWithdraw(event: Withdraw): void {
-  let entity = UserInfo.load(event.params.user.toHex());
-  if (!entity) {
-    entity = new UserInfo(event.params.user.toHex());
-    entity.user = event.params.user;
+  let userInfo = UserInfo.load(event.params.user.toHex());
+  if (!userInfo) {
+    userInfo = new UserInfo(event.params.user.toHex());
+    userInfo.user = event.params.user;
   }
 
-  entity.stake = entity.stake.minus(event.params.amount);
+  userInfo.stake = userInfo.stake.minus(event.params.amount);
 
-  entity.save();
+  userInfo.save();
+}
+
+export function handleHarvestToken(event: HarvestToken): void {
+  let userInfo = UserInfo.load(event.params.user.toHex());
+  if (!userInfo) {
+    userInfo = new UserInfo(event.params.user.toHex());
+    userInfo.user = event.params.user;
+  }
+
+  userInfo.harvested = userInfo.harvested.plus(event.params.amount);
+
+  userInfo.save();
 }
