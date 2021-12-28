@@ -12,6 +12,8 @@
 
 6. **[HCLP Pool](https://thegraph.com/explorer/subgraph/hashlandgamefi/hclp-pool)**: Tracks all HCLP in pool.
 
+7. **[HW Deposit](https://thegraph.com/explorer/subgraph/hashlandgamefi/hw-deposit)**: Tracks all Hash Warfare deposit.
+
 ## Dependencies
 
 - [Graph CLI](https://github.com/graphprotocol/graph-cli)
