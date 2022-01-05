@@ -14,6 +14,8 @@
 
 7. **[HW Deposit](https://thegraph.com/explorer/subgraph/hashlandgamefi/hw-deposit)**: Tracks all Hash Warfare deposit.
 
+8. **[HN Blind Box](https://thegraph.com/explorer/subgraph/hashlandgamefi/hn-blind-box)**: Tracks all HN in blind box.
+
 ## Dependencies
 
 - [Graph CLI](https://github.com/graphprotocol/graph-cli)
