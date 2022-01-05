@@ -30,6 +30,7 @@ export function handleBuy(event: Buy): void {
     buyInfo.spawntime = hn.spawntime(event.params.hnIds[i]);
     buyInfo.hcHashrate = hn.hashrates(event.params.hnIds[i], BigInt.fromI32(0));
     buyInfo.btcHashrate = hn.hashrates(event.params.hnIds[i], BigInt.fromI32(1));
+    buyInfo.ultra = hn.data(event.params.hnIds[i], 'ultra').equals(BigInt.fromI32(1)) ? true : false;
 
     buyInfo.save();
 
@@ -63,6 +64,7 @@ export function handleSell(event: Sell): void {
     sellInfo.spawntime = hn.spawntime(event.params.hnIds[i]);
     sellInfo.hcHashrate = hn.hashrates(event.params.hnIds[i], BigInt.fromI32(0));
     sellInfo.btcHashrate = hn.hashrates(event.params.hnIds[i], BigInt.fromI32(1));
+    sellInfo.ultra = hn.data(event.params.hnIds[i], 'ultra').equals(BigInt.fromI32(1)) ? true : false;
 
     sellInfo.save();
   }

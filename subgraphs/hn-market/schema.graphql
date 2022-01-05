@@ -16,6 +16,7 @@ type BuyInfo @entity {
   spawntime: BigInt!
   hcHashrate: BigInt!
   btcHashrate: BigInt!
+  ultra: Boolean!
 }
 
 type SellInfo @entity {
@@ -32,4 +33,5 @@ type SellInfo @entity {
   spawntime: BigInt!
   hcHashrate: BigInt!
   btcHashrate: BigInt!
+  ultra: Boolean!
 }
