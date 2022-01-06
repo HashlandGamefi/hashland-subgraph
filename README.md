@@ -1,20 +1,24 @@
 ## Subgraphs
 
-1. **[Hashland NFT](https://thegraph.com/explorer/subgraph/hashlandgamefi/hashland-nft)**: Tracks all Hashland NFT.
+**[Hashland NFT](https://thegraph.com/explorer/subgraph/hashlandgamefi/hashland-nft)**: Tracks all Hashland NFT.
 
-2. **[HN Market](https://thegraph.com/explorer/subgraph/hashlandgamefi/hn-market)**: Tracks all HN in market.
+**[HN Market](https://thegraph.com/explorer/subgraph/hashlandgamefi/hn-market)**: Tracks all HN in market.
 
-3. **[HN Pool](https://thegraph.com/explorer/subgraph/hashlandgamefi/hn-pool)**: Tracks all HN in pool.
+**[HN Pool](https://thegraph.com/explorer/subgraph/hashlandgamefi/hn-pool)**: Tracks all HN in pool.
 
-4. **[HN Upgrade](https://thegraph.com/explorer/subgraph/hashlandgamefi/hn-upgrade)**: Tracks the upgrade of all HN.
+**[HN Upgrade](https://thegraph.com/explorer/subgraph/hashlandgamefi/hn-upgrade)**: Tracks the upgrade of all HN.
 
-5. **[Invite Pool](https://thegraph.com/explorer/subgraph/hashlandgamefi/invite-pool)**: Tracks all inviters in pool.
+**[HN Upgrade V2](https://thegraph.com/explorer/subgraph/hashlandgamefi/hn-upgrade-v2)**: Tracks the upgrade v2 of all HN.
 
-6. **[HCLP Pool](https://thegraph.com/explorer/subgraph/hashlandgamefi/hclp-pool)**: Tracks all HCLP in pool.
+**[Invite Pool](https://thegraph.com/explorer/subgraph/hashlandgamefi/invite-pool)**: Tracks all inviters in pool.
 
-7. **[HW Deposit](https://thegraph.com/explorer/subgraph/hashlandgamefi/hw-deposit)**: Tracks all Hash Warfare deposit.
+**[HCLP Pool](https://thegraph.com/explorer/subgraph/hashlandgamefi/hclp-pool)**: Tracks all HCLP in pool.
 
-8. **[HN Blind Box](https://thegraph.com/explorer/subgraph/hashlandgamefi/hn-blind-box)**: Tracks all HN in blind box.
+**[HW Deposit](https://thegraph.com/explorer/subgraph/hashlandgamefi/hw-deposit)**: Tracks all Hash Warfare deposit.
+
+**[HN Blind Box](https://thegraph.com/explorer/subgraph/hashlandgamefi/hn-blind-box)**: Tracks all HN in blind box.
+
+**[HN Blind Box S2](https://thegraph.com/explorer/subgraph/hashlandgamefi/hn-blind-box-s2)**: Tracks all HN in blind box s2.
 
 ## Dependencies
 
