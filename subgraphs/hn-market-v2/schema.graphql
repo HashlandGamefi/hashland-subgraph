@@ -1,0 +1,37 @@
+type BuyInfo @entity {
+  id: ID!
+  hnId: BigInt!
+  buyer: Bytes!
+  seller: Bytes!
+  price: BigInt!
+  feeRatio: BigInt!
+  sellAmount: BigInt!
+  feeAmount: BigInt!
+  isInPool: Boolean!
+  buyTime: BigInt!
+  ip: BigInt!
+  series: BigInt!
+  level: BigInt!
+  hnClass: BigInt!
+  spawntime: BigInt!
+  hcHashrate: BigInt!
+  btcHashrate: BigInt!
+  ultra: Boolean!
+}
+
+type SellInfo @entity {
+  id: ID!
+  hnId: BigInt!
+  seller: Bytes!
+  price: BigInt!
+  isInPool: Boolean!
+  sellTime: BigInt!
+  ip: BigInt!
+  series: BigInt!
+  level: BigInt!
+  hnClass: BigInt!
+  spawntime: BigInt!
+  hcHashrate: BigInt!
+  btcHashrate: BigInt!
+  ultra: Boolean!
+}

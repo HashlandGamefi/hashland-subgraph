@@ -4,6 +4,8 @@
 
 **[HN Market](https://thegraph.com/explorer/subgraph/hashlandgamefi/hn-market)**: Tracks all HN in market.
 
+**[HN Market V2](https://thegraph.com/explorer/subgraph/hashlandgamefi/hn-market-v2)**: Tracks all HN in market v2.
+
 **[HN Pool](https://thegraph.com/explorer/subgraph/hashlandgamefi/hn-pool)**: Tracks all HN in pool.
 
 **[HN Upgrade](https://thegraph.com/explorer/subgraph/hashlandgamefi/hn-upgrade)**: Tracks the upgrade of all HN.
