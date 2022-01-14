@@ -25,6 +25,8 @@ dataSources:
           handler: handleSetHashrates
         - event: SetLevel(indexed uint256,uint256)
           handler: handleSetLevel
+        - event: SetData(indexed uint256,string,uint256)
+          handler: handleSetData
         - event: SpawnHn(indexed address,uint256)
           handler: handleSpawnHn
         - event: Transfer(indexed address,indexed address,indexed uint256)

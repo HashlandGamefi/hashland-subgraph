@@ -2,6 +2,7 @@ import { BigInt, Address } from "@graphprotocol/graph-ts"
 import {
   HN,
   SetHashrates,
+  SetData,
   SetLevel,
   SpawnHn,
   Transfer
@@ -19,6 +20,45 @@ export function handleSetHashrates(event: SetHashrates): void {
   hnInfo.btcHashrate = event.params.hashrates[1];
 
   hnInfo.save();
+}
+
+export function handleSetData(event: SetData): void {
+  if (event.params.slot == 'ultra') {
+    let hnInfo = HnInfo.load(event.params.hnId.toHex());
+    if (!hnInfo) {
+      hnInfo = new HnInfo(event.params.hnId.toHex());
+      hnInfo.hnId = event.params.hnId;
+    }
+
+    if (hnInfo.ultra == false) {
+      hnInfo.ultra = event.params.data.equals(BigInt.fromI32(1)) ? true : false;
+
+      hnInfo.save();
+
+      let hnCount = HnCount.load(BigInt.fromI32(0).toHex());
+      if (!hnCount) {
+        hnCount = new HnCount(BigInt.fromI32(0).toHex());
+      }
+
+      if (hnInfo.ultra == true) {
+        hnCount.ultra = hnCount.ultra.plus(BigInt.fromI32(1));
+      }
+
+      hnCount.save();
+
+      let hnCountByOwner = HnCountByOwner.load(hnInfo.owner.toHex());
+      if (!hnCountByOwner) {
+        hnCountByOwner = new HnCountByOwner(hnInfo.owner.toHex());
+        hnCountByOwner.owner = hnInfo.owner;
+      }
+
+      if (hnInfo.ultra == true) {
+        hnCountByOwner.ultra = hnCountByOwner.ultra.plus(BigInt.fromI32(1));
+      }
+
+      hnCountByOwner.save();
+    }
+  }
 }
 
 export function handleSetLevel(event: SetLevel): void {
@@ -173,6 +213,9 @@ export function handleTransfer(event: Transfer): void {
     } else {
       hnCountByOwnerFrom.l5 = hnCountByOwnerFrom.l5.minus(BigInt.fromI32(1));
     }
+    if (hnInfo.ultra == true) {
+      hnCountByOwnerFrom.ultra = hnCountByOwnerFrom.ultra.minus(BigInt.fromI32(1));
+    }
 
     hnCountByOwnerFrom.save();
 
@@ -193,6 +236,9 @@ export function handleTransfer(event: Transfer): void {
       hnCountByOwnerTo.l4 = hnCountByOwnerTo.l4.plus(BigInt.fromI32(1));
     } else {
       hnCountByOwnerTo.l5 = hnCountByOwnerTo.l5.plus(BigInt.fromI32(1));
+    }
+    if (hnInfo.ultra == true) {
+      hnCountByOwnerTo.ultra = hnCountByOwnerTo.ultra.plus(BigInt.fromI32(1));
     }
 
     hnCountByOwnerTo.save();

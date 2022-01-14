@@ -1,0 +1,27 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: HNBlindBoxS2
+    network: bsc
+    source:
+      address: "0x2CA1B76C33572B1AAFB090f35BdF446B26AC95Fc"
+      abi: HNBlindBoxS2
+      startBlock: 14354220
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - BuyBoxes
+        - SpawnHns
+      abis:
+        - name: HNBlindBoxS2
+          file: ./abis/HNBlindBoxS2.json
+      eventHandlers:
+        - event: BuyBoxes(indexed address,uint256,uint256)
+          handler: handleBuyBoxes
+        - event: SpawnHns(indexed address,uint256,uint256[],uint256[],bool[])
+          handler: handleSpawnHns
+      file: ./src/mapping.ts

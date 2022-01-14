@@ -66,6 +66,7 @@ export function handleDeposit(event: Deposit): void {
     hnInfo.spawntime = hn.spawntime(event.params.hnIds[i]);
     hnInfo.hcHashrate = hn.hashrates(event.params.hnIds[i], BigInt.fromI32(0));
     hnInfo.btcHashrate = hn.hashrates(event.params.hnIds[i], BigInt.fromI32(1));
+    hnInfo.ultra = hn.data(event.params.hnIds[i], 'ultra').equals(BigInt.fromI32(1)) ? true : false;
 
     hnInfo.save();
 
@@ -82,6 +83,9 @@ export function handleDeposit(event: Deposit): void {
       userInfo.l4 = userInfo.l4.plus(BigInt.fromI32(1));
     } else {
       userInfo.l5 = userInfo.l5.plus(BigInt.fromI32(1));
+    }
+    if (hnInfo.ultra == true) {
+      userInfo.ultra = userInfo.ultra.plus(BigInt.fromI32(1));
     }
   }
 
@@ -114,6 +118,9 @@ export function handleHNMarketWithdraw(event: HNMarketWithdraw): void {
     userInfo.l4 = userInfo.l4.minus(BigInt.fromI32(1));
   } else {
     userInfo.l5 = userInfo.l5.minus(BigInt.fromI32(1));
+  }
+  if (hnInfo.ultra == true) {
+    userInfo.ultra = userInfo.ultra.minus(BigInt.fromI32(1));
   }
 
   store.remove('HnInfo', event.params.hnId.toHex());
@@ -166,6 +173,9 @@ export function handleWithdraw(event: Withdraw): void {
       userInfo.l4 = userInfo.l4.minus(BigInt.fromI32(1));
     } else {
       userInfo.l5 = userInfo.l5.minus(BigInt.fromI32(1));
+    }
+    if (hnInfo.ultra == true) {
+      userInfo.ultra = userInfo.ultra.minus(BigInt.fromI32(1));
     }
 
     store.remove('HnInfo', event.params.hnIds[i].toHex());

@@ -9,6 +9,7 @@ type HnInfo @entity {
   spawntime: BigInt!
   hcHashrate: BigInt!
   btcHashrate: BigInt!
+  ultra: Boolean!
 }
 
 type UserInfo @entity {
@@ -26,6 +27,7 @@ type UserInfo @entity {
   l3: BigInt!
   l4: BigInt!
   l5: BigInt!
+  ultra: BigInt!
 }
 
 type SlotCount @entity {
